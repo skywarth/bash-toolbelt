@@ -5,7 +5,10 @@ Toolbelt_dot() { file=$1; shift; . "$file"; }
 
 
 Toolbelt_readConfig() {
-while read -r line; do declare  "$line"; done < $1
+while read -r line
+do
+declare -g "$line"
+done < $1
 }
 # usage example below
 # Toolbelt_readConfig config-file-location
