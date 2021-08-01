@@ -20,8 +20,7 @@ done < $1
 
 
 Toolbelt_parseJSON(){
-     local -n jsonArray=$2
-  jsonArray[0]="rrr"
+  local -n jsonArray=$2
 
   SETTINGS_FILE="$1"
   SETTINGS_JSON=$(cat $SETTINGS_FILE)
