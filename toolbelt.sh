@@ -35,14 +35,15 @@ Toolbelt_parseJSON(){
   local -n jsonArray=$2
 
   SETTINGS_FILE="$1"
-  local _fileRealPath=$(realpath $SETTINGS_FILE)
-  echo $_fileRealPath;
+
 
   if [ ! -f $SETTINGS_FILE ]; then
+      local _fileRealPath=$(realpath $SETTINGS_FILE)
       echo "ERROR: [Toolbelt_parseJSON()] $_fileRealPath does not exists"
       exit 1
   elif [ ! -r $SETTINGS_FILE ]
   then
+      local _fileRealPath=$(realpath $SETTINGS_FILE)
       echo "ERROR: [Toolbelt_parseJSON()] $_fileRealPath is not readable"
       exit 1
   fi
