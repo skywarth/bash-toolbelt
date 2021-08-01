@@ -5,6 +5,18 @@ Toolbelt_dot() { file=$1; shift; . "$file"; }
 
 
 Toolbelt_readConfig() {
+local _fileRealPath="$(realpath $1)"
+
+
+if [ ! -f $_fileRealPath ]; then
+    echo "ERROR: [Toolbelt_readConfig()] $_fileRealPath does not exists"
+    exit 1
+elif [ ! -r $_fileRealPath ]
+then
+    echo "ERROR: [Toolbelt_readConfig()] $_fileRealPath is not readable"
+    exit 1
+fi 
+
 while read -r line
 do
 declare -g "$line"
@@ -23,6 +35,20 @@ Toolbelt_parseJSON(){
   local -n jsonArray=$2
 
   SETTINGS_FILE="$1"
+  local _fileRealPath=$(realpath $SETTINGS_FILE)
+  echo $_fileRealPath;
+
+  if [ ! -f $SETTINGS_FILE ]; then
+      echo "ERROR: [Toolbelt_parseJSON()] $_fileRealPath does not exists"
+      exit 1
+  elif [ ! -r $SETTINGS_FILE ]
+  then
+      echo "ERROR: [Toolbelt_parseJSON()] $_fileRealPath is not readable"
+      exit 1
+  fi
+
+
+
   SETTINGS_JSON=$(cat $SETTINGS_FILE)
   __readJSON "$SETTINGS_JSON"
 }
